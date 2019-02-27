@@ -4,19 +4,21 @@ const router         = express.Router();
 const User           = require('../models/user-model');
 const Plan           = require('../models/plan-model');
 
+//Route for user's profile =====> /localhost:3000/profile
+// router.get("/profile", ensureAuthenticated, (req, res) => {
+//   res.render("user/user-profile", { user: req.user });
+// });
 
 //List all plans created by admins ======>localhost:3000/plans
 router.get('/profile', ensureAuthenticated, (req, res, next) =>{
-  User.findById(req.user._id).populate('plan')
+  User.findById(req.user._id)
     .then((user) =>{
-      // const isIncluded = user.plan.includes(req.user.plan);
-      // console.log('The included plan is: ', isIncluded)
-      // console.log('The current user plan is: ', user.plan)
-      // if(req.user.plan && isIncluded){
-      //   user.plan.isMember = true;
-      //   console.log('the user has plan: ', user.plan);
-      // }
-      console.log('the plans ar: ', user.plan);
+      const isIncluded = user.plan.includes(req.user.plan);
+      console.log('The included plan is: ', isIncluded)
+      console.log('The current user plan is: ', user.plan)
+      if(req.user.plan && isIncluded){
+        user.plan.isMember = true;
+      }
       res.render('user/user-profile', {user});
     })
     .catch((error) =>{
@@ -67,7 +69,6 @@ router.post('/:id/edit', (req, res, next) => {
       user.fullName = fullName;
       user.email = email;
       const isIncluded = user.plan.indexOf(req.body.plan) > -1;
-      //create const isOwner...room-details is
       // if(isIncluded){
       //   // req.flash()
       // }
@@ -97,7 +98,6 @@ router.post('/:id/delete', (req, res, next) =>{
     })
     .catch(error => console.log('error while deleting the user: ', error))
 })
-
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {

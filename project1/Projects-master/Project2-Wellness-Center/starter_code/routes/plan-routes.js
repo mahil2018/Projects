@@ -11,7 +11,7 @@ const checkEditor = checkRoles('EDITOR');
 const checkAdmin  = checkRoles('ADMIN');
 
 //List all plans created by admins ======>localhost:3000/plans
-router.get('/', checkAdmin, (req, res, next) =>{
+router.get('/', (req, res, next) =>{
     Plan.find()
       .then((plans) =>{
         res.render('plans/plan-list', {plans});
@@ -29,7 +29,8 @@ router.get("/add", checkAdmin, (req, res) => {
 router.post('/add', uploadCloud.single('imagePlan'), (req, res, next) => {
     const { name, description } = req.body;
     const imagePlan = req.file.secure_url;
-    const newPlan = new Plan ({name, description, imagePlan})
+    const owner     = req.user._id;
+    const newPlan = new Plan ({name, description, imagePlan, owner})
     newPlan.save()
       .then(plans => {
         res.redirect('/plans');
@@ -50,6 +51,11 @@ router.get('/:id', ensureAuthenticated, (req, res, next) => {
         if (!plan) {
             return res.status(404).render('not-found');
         }
+        // if(req.user && plan.member){
+        //   if(plan.member.equals(req.user._id)){
+        //     plan.isMember = true;
+        //   }
+        // }
         res.render('plans/plan-details', { plan })
       })
       .catch (error => next (error))
@@ -75,7 +81,7 @@ router.post('/:id/update', uploadCloud.single('imagePlan'), (req, res, next) => 
       description : description,
       imagePlan   : req.file.secure_url
     })
-      .then(() =>{
+      .then((plan) =>{
         res.redirect('/plans');
       })
       .catch((error) =>{
@@ -86,7 +92,7 @@ router.post('/:id/update', uploadCloud.single('imagePlan'), (req, res, next) => 
 //POST /plans/5c742b2ae09a3a265d1ea374/delete
 router.post('/:id/delete', (req, res, next) =>{
     Plan.findByIdAndDelete({'_id': req.params.id})
-      .then(() =>{
+      .then(deletedPlan =>{
         res.redirect('/plans')
       })
       .catch(error => console.log('error while deleting the plan: ', error))
@@ -105,7 +111,7 @@ function checkRoles(role) {
     if (req.isAuthenticated() && req.user.role === role) {
       return next();
     } else {
-      res.redirect('/user/user-profile')
+      res.redirect('/login')
     }
   }
 }
