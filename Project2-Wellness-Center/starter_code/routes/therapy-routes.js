@@ -16,7 +16,7 @@ router.get("/:id", ensureAuthenticated, (req, res) => {
 })
 
 // //localhost:3000/therapy/one
-router.get("/one", ensureAuthenticated, (req, res) => {
+router.get("/:planId/one", ensureAuthenticated, (req, res) => {
   res.render("routine/therapy/dayt1", { user: req.user });
 });
 

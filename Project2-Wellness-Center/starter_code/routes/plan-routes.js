@@ -11,10 +11,10 @@ const checkEditor = checkRoles('EDITOR');
 const checkAdmin  = checkRoles('ADMIN');
 
 //List all plans created by admins ======>localhost:3000/plans
-router.get('/', checkAdmin, (req, res, next) =>{
+router.get('/',  (req, res, next) =>{   //checkAdmin,
     Plan.find()
       .then((plans) =>{
-        console.log('review the plans: ', plans);
+        // console.log('review the plans: ', plans);
         res.render('plans/plan-list', {plans});
       })
       .catch((error) =>{
@@ -85,7 +85,7 @@ router.post('/:id/update', uploadCloud.single('imagePlan'), (req, res, next) => 
 })
 
 //POST /plans/5c742b2ae09a3a265d1ea374/delete
-router.post('/:id/delete', (req, res, next) =>{
+router.post('/:id/delete', checkAdmin, (req, res, next) =>{
     Plan.findByIdAndDelete({'_id': req.params.id})
       .then(() =>{
         res.redirect('/plans')

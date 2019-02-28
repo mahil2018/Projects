@@ -9,14 +9,15 @@ const Routine        = require('../models/routine-model');
 router.get("/:id", ensureAuthenticated, (req, res) => {
   Plan.findById(req.params.id)
     .then(plan =>{
+      const userPlan = req.user.id;
       res.render("plans/plan-details", {plan});
     })
     .catch(err => console.log('Error while finding the plan: ', err));
   
 })
-//localhost:3000/fitness/5c7703ead9ff79e3f02e7fb8
+//localhost:3000/fitness/5c7703ead9ff79e3f02e7fb8  ++++++++++++++++++++++++
 //localhost:3000/fitness/one
-router.get("/one", ensureAuthenticated, (req, res) => {
+router.get("/:planId/one", ensureAuthenticated, (req, res) => {     //:planid/:userid
   res.render("routine/fitness/day1", { user: req.user });   ///routine/fitness/day1
 });
 
