@@ -14,14 +14,14 @@ router.get("/:id", ensureAuthenticated, (req, res) => {
     .catch(err => console.log('Error while finding the plan: ', err));
   
 })
-//localhost:3000/fitness/5c7703ead9ff79e3f02e7fb8
-//localhost:3000/fitness/one
+
+// //localhost:3000/therapy/one
 router.get("/one", ensureAuthenticated, (req, res) => {
-  res.render("routine/fitness/day1", { user: req.user });   ///routine/fitness/day1
+  res.render("routine/therapy/dayt1", { user: req.user });
 });
 
-// User update routine
-//localhost:3000/fitness/5c75b1ab33b63d96ff79050a/create
+// // User update routine
+// //localhost:3000/therapy/5c75b1ab33b63d96ff79050a/create
 router.post("/:userId/create", ensureAuthenticated, (req, res) =>{
   const newRoutine = {
     water: req.body.water,
@@ -38,7 +38,7 @@ router.post("/:userId/create", ensureAuthenticated, (req, res) =>{
         foundUser.routines.push(thenewRoutine._id);
         foundUser.save()
         .then(() => {
-          res.redirect('/fitness/one')
+          res.redirect('/therapy/one')
         })
         .catch(err => console.log('Error while saving the user: ', err));
       })

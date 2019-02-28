@@ -14,6 +14,7 @@ const checkAdmin  = checkRoles('ADMIN');
 router.get('/', checkAdmin, (req, res, next) =>{
     Plan.find()
       .then((plans) =>{
+        console.log('review the plans: ', plans);
         res.render('plans/plan-list', {plans});
       })
       .catch((error) =>{
