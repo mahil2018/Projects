@@ -16,7 +16,7 @@ router.get('/profile', ensureAuthenticated, (req, res, next) =>{
       //   user.plan.isMember = true;
       //   console.log('the user has plan: ', user.plan);
       // }
-      console.log('the plans are: ', user.plan);
+      // console.log('the plans are: ', user.plan);
       res.render('user/user-profile', {user});
     })
     .catch((error) =>{

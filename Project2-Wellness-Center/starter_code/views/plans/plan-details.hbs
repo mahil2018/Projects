@@ -21,6 +21,27 @@
     </li><br>
 </ul>
 
+ {{!-- ==========='/:planId/add-review'============= --}}
+<h2>Add a Review</h2>
+  <form action="/reviews/{{plan._id}}/add-review" method="POST">   
+  <textarea name="comment" id="" cols="30" rows="10"></textarea>
+  <button type="submit">Add</button>
+  </form>
+
+  {{!-- if ther are reviews, show them, if not, forget about it @ --}}
+  {{#if plan.reviews}}
+    <h3>Reviews: </h3>
+    {{#each plan.reviews}}
+    <p> <b>{{ this.user.fullname }} said: </b> {{ this.comment }} </p>
+      {{#if this.canBeChanged}}
+        <a href="/reviews/{{this._id}}">Edit</a>
+          <form action="/reviews/{{this._id}}" method="POST">
+            <button type="submit">Delete</button>
+          </form>
+      {{/if}}
+    {{/each}}
+  {{/if}}
+
  
 
 
