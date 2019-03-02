@@ -15,15 +15,15 @@ router.get("/:id", ensureAuthenticated, (req, res) => {
   
 })
 
-// //localhost:3000/therapy/one
+// //localhost:3000/therapyA/one
 router.get("/:planId/one", ensureAuthenticated, (req, res) => {
   const planId = req.params.planId;
   console.log('este: ', planId);
-  res.render("routine/therapy/dayt1", { user: req.user });
+  res.render("routine/therapyA/dayt1", { user: req.user });
 });
 
 // // User update routine
-// //localhost:3000/therapy/5c75b1ab33b63d96ff79050a/create
+// //localhost:3000/therapyA/5c75b1ab33b63d96ff79050a/create
 router.post("/:planId/create", ensureAuthenticated, (req, res) =>{
   const newRoutine = {
     water     : req.body.water,
@@ -40,8 +40,8 @@ router.post("/:planId/create", ensureAuthenticated, (req, res) =>{
       foundUser.routines.push(thenewRoutine._id);
       foundUser.save()
         .then(() => {
-          // res.redirect('/therapy/one');
-          res.redirect(`/therapy/${req.params.planId}/one`);
+          // res.redirect('/therapyA/one');
+          res.redirect(`/therapyA/${req.params.planId}/one`);
         })
         .catch(err => console.log('Error while saving the user: ', err));
       })

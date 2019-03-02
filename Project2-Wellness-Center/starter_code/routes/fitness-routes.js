@@ -18,7 +18,7 @@ router.get("/:id", ensureAuthenticated, (req, res) => {
 //localhost:3000/fitness/one
 router.get("/:planId/one", ensureAuthenticated, (req, res) => {  
   const planId = req.params.planId;  
-  // console.log('este: ', planId);
+  console.log('este: ', planId);
   res.render("routine/fitness/day1", { user: req.user, planId });   ///routine/fitness/day1
 });
 

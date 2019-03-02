@@ -28,9 +28,9 @@ router.get("/add", checkAdmin, (req, res) => {
 });
 
 router.post('/add', uploadCloud.single('imagePlan'), (req, res, next) => {
-    const { name, description } = req.body;
+    const { name, events, description } = req.body;
     const imagePlan = req.file.secure_url;
-    const newPlan = new Plan ({name, description, imagePlan})
+    const newPlan = new Plan ({name, events, description, imagePlan})
     newPlan.save()
       .then(plans => {
         res.redirect('/plans');
@@ -61,7 +61,7 @@ router.get('/:id', ensureAuthenticated, (req, res, next) => {
 ////////////////////////////////////////////////////////////////////////////
 //Edit route =====> //localhost:3000/plans/5c6b88be561f7043c47ad7aa/update
 router.get('/:id/update', checkAdmin, (req, res, next) => {
-    Plan.findOne({_id: req.params.id})
+    Plan.findOneAndUpdate({_id: req.params.id})
       .then((plan) => {
         res.render("plans/plan-update", {plan});
       })
@@ -72,10 +72,11 @@ router.get('/:id/update', checkAdmin, (req, res, next) => {
 
 //POST /plans/5c7450030cac6b2d948e91e4/update
 router.post('/:id/update', uploadCloud.single('imagePlan'), (req, res, next) => {
-    const {name, description} = req.body;
+    const {name, events, description} = req.body;
     // console.log('the image file is: ', req.file)
     Plan.findByIdAndUpdate(req.params.id, {
       name        : name,
+      events      : events,
       description : description,
       imagePlan   : req.file.secure_url
     })

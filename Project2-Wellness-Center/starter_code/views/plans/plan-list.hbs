@@ -1,8 +1,8 @@
 <h1>Plans available at Body Wellness Treatments Center</h1>
 <div class="rooms-wrapper">
   {{#each plans}}
-    <div class="room-item">
-      <h3><a href="/plans/{{this._id}}">  {{this.name}} </a> </h3>
+    <div class="plan-item">
+      <h3><a href="/plans/{{this._id}}">  {{this.name}} {{this.events}}</a> </h3>
       <img src="{{this.imagePlan}}" alt="Plan Image" width="300">
       <h4><b>Description:</b></h4>
       <p>{{this.description}}</p>
