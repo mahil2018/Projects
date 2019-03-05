@@ -1,0 +1,10 @@
+<h3> Progress :   {{ this.name }} </h3> 
+  {{#if plan.events}}
+    <h3>PROGRESS </h3>
+    {{#each plan.events}}
+    <p>Calories : {{ this.plan.routine.calories }} </p>
+    <p>Water    : {{ this.plan.routine.water }} </p>
+    <p>Sleep    : {{ this.plan.routine.sleep }} </p>
+    <p>Exercise : {{ this.plan.routine.exercise }} </p>
+    {{/each}}
+  {{/if}}

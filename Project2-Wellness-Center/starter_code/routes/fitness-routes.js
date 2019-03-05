@@ -9,6 +9,7 @@ const Routine        = require('../models/routine-model');
 router.get("/:id", ensureAuthenticated, (req, res) => {
   Plan.findById(req.params.id)
     .then(plan =>{
+    
       res.render("plans/plan-details", {plan});
     })
     .catch(err => console.log('Error while finding the plan: ', err));
@@ -16,11 +17,16 @@ router.get("/:id", ensureAuthenticated, (req, res) => {
 })
 //localhost:3000/fitness/5c7703ead9ff79e3f02e7fb8  ++++++++++++++++++++++++
 //localhost:3000/fitness/one
-router.get("/:planId/one", ensureAuthenticated, (req, res) => {  
+router.get("/:planId/1", ensureAuthenticated, (req, res) => {  
   const planId = req.params.planId;  
-  console.log('este: ', planId);
-  res.render("routine/fitness/day1", { user: req.user, planId });   ///routine/fitness/day1
-});
+  Plan.findById(req.params.planId)
+  .then(plan =>{
+  
+    res.render("routine/fitness/1", { user: req.user, planId, plan});
+  })
+  .catch(err => console.log('Error while finding the plan: ', err));
+
+})
 
 // User update routine
 //localhost:3000/fitness/5c75b1ab33b63d96ff79050a/create
@@ -33,6 +39,7 @@ router.post("/:planId/create", ensureAuthenticated, (req, res) =>{
     member  : req.user._id
     }
   // console.log(' we are to see: ', req.body );
+  // const i=0;
   Routine.create(newRoutine)
     .then(thenewRoutine =>{
       User.findById(req.user._id)
@@ -40,7 +47,7 @@ router.post("/:planId/create", ensureAuthenticated, (req, res) =>{
         foundUser.routines.push(thenewRoutine._id);
         foundUser.save()
           .then(() => {
-            res.redirect(`/fitness/${req.params.planId}/one`);
+            res.redirect(`/fitness/${req.params.planId}/1`)
             // res.redirect('/user/profile')
           })
           .catch(err => console.log('Error while saving the user: ', err));
@@ -49,6 +56,19 @@ router.post("/:planId/create", ensureAuthenticated, (req, res) =>{
     })
     .catch(err => console.log('Error while saving the user: ', err));
 })
+
+//=================progress=====================//
+
+router.get('/:planId/progress', ensureAuthenticated, (req, res, next) =>{
+  
+  Plan.findById(req.params.id)
+    .then(plan =>{
+      res.redirect(`/fitness/${req.params.planId}/1`, plan);
+    })
+    .catch(err => console.log('Error while finding the plan: ', err));
+  });
+
+
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
@@ -56,6 +76,7 @@ function ensureAuthenticated(req, res, next) {
     res.redirect('/login')
   }
 }
+
 
 
 

@@ -16,10 +16,10 @@ router.get("/:id", ensureAuthenticated, (req, res) => {
 })
 
 // //localhost:3000/therapy/one
-router.get("/:planId/one", ensureAuthenticated, (req, res) => {
+router.get("/:planId/1", ensureAuthenticated, (req, res) => {
   const planId = req.params.planId;
   console.log('este: ', planId);
-  res.render("routine/therapy/dayt1", { user: req.user });
+  res.render("routine/therapy/1", { user: req.user });
 });
 
 // // User update routine
@@ -41,7 +41,7 @@ router.post("/:planId/create", ensureAuthenticated, (req, res) =>{
       foundUser.save()
         .then(() => {
           // res.redirect('/therapy/one');
-          res.redirect(`/therapy/${req.params.planId}/one`);
+          res.redirect(`/therapy/${req.params.planId}/1`);
         })
         .catch(err => console.log('Error while saving the user: ', err));
       })

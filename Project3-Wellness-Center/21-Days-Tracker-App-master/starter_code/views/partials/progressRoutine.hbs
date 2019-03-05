@@ -1,5 +1,13 @@
+{{!-- progressRoutine.hbs --}}
 <section>
-  <form action="/fitness/{{planId}}/create" method="post" > 
+  <form action="/{{plan.name}}/{{plan._id}}/add-routine" method="post" enctype="multipart/form-data"> 
+   	
+    <label for="">Session: {{plan.routine.session}}</label>
+	  <input type="number" name="session">
+  
+
+	  <label>Image session {{plan.routine.session}}</label>
+    <input type="file" name="imagePlan">
 
     <label for="">Water : 8 glasses</label>
     <input type="Number" name="water" id="" value="{{user.plan.routine.water}}">
@@ -16,15 +24,3 @@
     <button type="submit">Save Changes</button>
   </form>
 </section>
-<h3> Progress :   {{ user.plan }} </h3> 
-  {{!-- {{#if user.plan.events}} --}}
-    <h3>PROGRESS </h3>
-    {{!-- {{#each plan.events}}
-    <p>Calories : {{ this.plan.routine.calories }} </p>
-    <p>Water    : {{ this.plan.routine.water }} </p>
-    <p>Sleep    : {{ this.plan.routine.sleep }} </p>
-    <p>Exercise : {{ this.plan.routine.exercise }} </p>
-    {{/each}} --}}
-  {{!-- {{/if}} --}}
-
-

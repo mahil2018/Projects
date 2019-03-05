@@ -1,0 +1,33 @@
+<h1>{{plan.name}}</h1>
+{{#if plan.imagePlan}}
+  <img src="{{plan.imagePlan}}" alt="Workout Motivation" width="300">
+{{else}}
+  <p>This plan doesn't have an image</p>
+{{/if}}
+<br>
+<h4>Description: </h4>
+<p>{{plan.description}}</p>
+
+{{!-- //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ --}}
+{{#if user.isAdmin}}
+  <form action="/plans/{{plan._id}}/add-routine">
+    <button type="submit">Create Session</button>
+  </form>
+{{/if}}
+{{#each plan.routines}}
+  <a href="/routine/{{this._id}}/{{this.session}}">Session {{this.session}}</a>
+{{/each}}
+{{!-- 
+{{!-- {{#if plan.reviews}}
+    <h3>Reviews: </h3>
+    {{#each plan.reviews}}
+    <p> <b>{{ this.user.fullname }} said: </b> {{ this.comment }} </p>
+      {{#if this.canBeChanged}}
+        <a href="/reviews/{{this._id}}">Edit</a>
+          <form action="/reviews/{{this._id}}" method="POST">
+            <button type="submit">Delete</button>
+          </form>
+      {{/if}}
+    {{/each}}
+{{!-- {{/if}} --}} 
+
