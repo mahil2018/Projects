@@ -5,7 +5,7 @@ const planSchema = new Schema({
     name        : { type: String },
     description : { type: String },
     imagePlan   : { type: String },
-    routines    : [{ type: Schema.Types.ObjectId, ref: "Routine" }],
+    sessions    : [{ type: Schema.Types.ObjectId, ref: "Session" }],
     reviews     : [{ type: Schema.Types.ObjectId, ref: "Feedback" }]
     
 }, {

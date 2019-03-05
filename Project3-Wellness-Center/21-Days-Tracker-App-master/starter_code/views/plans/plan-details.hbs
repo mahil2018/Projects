@@ -10,12 +10,12 @@
 
 {{!-- //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ --}}
 {{#if user.isAdmin}}
-  <form action="/plans/{{plan._id}}/add-routine">
+  <form action="/plans/{{plan._id}}/add-session">
     <button type="submit">Create Session</button>
   </form>
 {{/if}}
-{{#each plan.routines}}
-  <a href="/routine/{{this._id}}/{{this.session}}">Session {{this.session}}</a>
+{{#each plan.sessions}}
+  <a href="/session/{{this._id}}/{{this.session}}">Session {{this.session}}</a><br>
 {{/each}}
 {{!-- 
 {{!-- {{#if plan.reviews}}

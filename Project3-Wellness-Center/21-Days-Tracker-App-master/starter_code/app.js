@@ -67,7 +67,7 @@ app.use('/', require('./routes/index'))
 app.use('/', require('./routes/auth-routes'));
 app.use('/user', require('./routes/user-routes'));
 app.use('/plans', require('./routes/plan-routes'));
-app.use('/', require('./routes/routine-routes'));
+app.use('/', require('./routes/session-routes'));
 app.use('/therapy', require('./routes/therapy-routes'));
 app.use('/feedback', require('./routes/feedback-routes'));
 

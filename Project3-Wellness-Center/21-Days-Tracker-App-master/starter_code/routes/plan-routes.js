@@ -6,6 +6,7 @@ const uploadCloud    = require('../config/upload-setup/cloudinary')
 // Require mongoose models
 const User           = require('../models/user-model');
 const Plan           = require('../models/plan-model');
+const Session        = require('../models/session-model')
 const Routine        = require('../models/routine-model');
 //create functions that will check against different roles automatically
 const checkEditor = checkRoles('EDITOR');
@@ -47,7 +48,7 @@ router.get('/:id', ensureAuthenticated, (req, res, next) => {
     if (!/^[0-9a-fA-F]{24}$/.test(planId)) { 
       return res.status(404).render('not-found');
     }
-    Plan.findById(req.params.id).populate('routines')
+    Plan.findById(req.params.id).populate('sessions')
       .then(plan => {
         if (!plan) {
             return res.status(404).render('not-found');
@@ -101,24 +102,22 @@ router.post('/:id/delete', (req, res, next) =>{
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //localhost:3000/plans/5c7dac940af36413437b1228/add-routine?
-router.get("/:id/add-routine", ensureAuthenticated, uploadCloud.single('imageRoutine'),(req, res) =>{
-  // console.log('HERE WE ARE ', req.params.id);
-  Plan.findById(req.params.id).populate('routines')
+router.get('/:id/add-session', ensureAuthenticated, uploadCloud.single('imageSession'),(req, res) =>{
+  Plan.findById(req.params.id).populate('sessions')
   // .populate({path:'routines', populate: {path: 'user'}})
     .then(plan =>{
-      res.render("routine/routine-add", {plan});
-      
+      res.render('session/session-add', {plan});
     })
     .catch(error => console.log('Error while finding the plan: ', error))
 });
 
-router.post("/:id/add-routine", ensureAuthenticated, uploadCloud.single('imageRoutine'),(req, res) =>{
+router.post('/:id/add-session', ensureAuthenticated, uploadCloud.single('imageSession'),(req, res) =>{
   // console.log('HERE WE ARE ', req.params.id);
-  const newRoutine = {
+  const newSession = {
     session      : req.body.session,
     education     : req.body.education,
     tips          : req.body.tips,
-    imageRoutine  : req.file.secure_url,
+    imageSession  : req.file.secure_url,
     water         : req.body.water,
     calories      : req.body.calories,
     sleep         : req.body.sleep,
@@ -126,11 +125,11 @@ router.post("/:id/add-routine", ensureAuthenticated, uploadCloud.single('imageRo
     
     }
   // console.log(' we are to see: ', req.body );
-  Routine.create(newRoutine)
-    .then(thenewRoutine =>{
+  Session.create(newSession)
+    .then(thenewSession =>{
       Plan.findById(req.params.id)
       .then(foundPlan =>{
-        foundPlan.routines.push(thenewRoutine._id);
+        foundPlan.sessions.push(thenewSession._id);
         foundPlan.save()
           .then(() => {
             res.redirect(`/plans/${req.params.id}`);
