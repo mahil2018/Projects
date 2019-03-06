@@ -28,6 +28,27 @@
         <label for="">Exercise : 60 minutes</label>
         <input type="Number" name="exercise" id=""><br>
 
-        <button type="submit">Add session </button>
+        <button type="submit">Submit </button>
 </form>
 
+<h4>Add Feedback</h4>
+<form action="/feedback/{{session._id}}/add-feedback" method="POST">
+  <textarea name="comment" id="" cols="30" rows="10"></textarea><br>
+  <button type="submit">Add Feedback </button>
+</form>
+{{#if session.feedbacks}}
+  <h4>Feedbacks</h4>
+  {{#each session.feedbacks}}
+    <p> <b>{{ this.user.fullName }} said : </b> {{ this.comment }} </p>
+        {{!-- {{#if this.canBeChanged}} --}}
+        <form action="/feedback/{{this._id}}/edit">
+            <button type="submit"> EDIT </button>
+        </form>
+        <form action="/feedback/{{this._id}}/delete" method="POST">
+          <button type="submit"> DELETE </button>
+        </form>  
+  {{/each}}
+{{/if}}
+
+
+  

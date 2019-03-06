@@ -1,0 +1,27 @@
+   
+   
+<h4> Edit Feedback <h4>
+    
+        <form action="/feedback/{{feedbackId}}/edit" method="POST">
+                <textarea name="comment" id="" cols="30" rows="10" value="{{feedbackId.comment}}"></textarea><br>
+                <button type="submit"> Update Comment </button>
+        </form>
+    
+
+    {{#each session.feedbacks}}
+        <textarea name="comment" id="" cols="30" rows="10" value="{{feedbackId.comment}}"></textarea><br>
+     {{/each}}
+
+    {{!-- {#if session.feedbacks}}
+  <h4>Feedbacks</h4>
+  {{#each session.feedbacks}}
+    <p> <b>{{ this.user.fullName }} said : </b> {{ this.comment }} </p>
+        {{!-- {{#if this.canBeChanged}} --}}
+        {{!-- <form action="/feedback/{{this._id}}/edit">
+            <button type="submit"> EDIT </button>
+        </form>
+        <form action="/feedback/{{this._id}}/delete" method="POST">
+          <button type="submit"> DELETE </button>
+        </form>  
+  {{/each}}
+{{/if}} --}} 

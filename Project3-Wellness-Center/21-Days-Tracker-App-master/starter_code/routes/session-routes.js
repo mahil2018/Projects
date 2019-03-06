@@ -9,7 +9,9 @@ const uploadCloud    = require('../config/upload-setup/cloudinary');
 
 //Routine details ====> //localhost:3000/routine/5c7eb3ba952c9337f865d955/1
 router.get('/session/:id/1', (req, res, next) =>{
-  Session.findById(req.params.id)
+  Session.findById(req.params.id).populate('feedbacks')
+  .populate({path:'feedbacks', populate: {path: 'user'}})
+
     .then(foundSession =>{
       res.render('session/session-details', {session: foundSession, user: req.user})
     })
