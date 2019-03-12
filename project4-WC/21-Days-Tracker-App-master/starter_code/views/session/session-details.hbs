@@ -1,0 +1,62 @@
+<h1>Welcome to session {{session.session}}</h1>
+{{#if session.imageSession}}
+  <img src="{{session.imageSession}}" alt="Workout Motivation" width="300">
+{{else}}
+  <p>This session doesn't have an image</p>
+{{/if}}
+<br>
+<h4>Education: </h4>
+<p>{{session.education}}</p> <br>
+<h4>Tips: </h4>
+<p>{{session.tips}}</p> <br>
+<h4>Progress</h4>
+
+<form action="/session/{{session._id}}/{{session.session}}" method="post"> 
+
+        <label for="">Session</label>
+        <input type="Number" name="session" id="" value={{session.session}}><br>
+
+        <label for="">Calories : 2000 cal</label>
+        <input type="Number" name="calories" id=""><br>
+
+        <label for="">Water : 8 glasses</label>
+        <input type="Number" name="water" id=""><br>
+
+        <label for="">Sleep : 8 hours/day</label>
+        <input type="Number" name="sleep" id="" ><br>
+
+        <label for="">Exercise : 60 minutes</label>
+        <input type="Number" name="exercise" id=""><br>
+
+        <button type="submit">Submit </button>
+</form>
+{{!-- <h4>Progress Plan </h4
+<ul>
+{{#each session}}
+  <li>{{session.session}} Calories: {{session.calories}} Water: {{session.water}} Sleep: {{session.sleep}} Exercise: {{session.exercise}}</li>
+
+<form action="/session/{{this.session._id}}/progress">
+
+  <button type="submit">Submit </button>
+</form>
+<h4>Add Feedback</h4>
+<form action="/feedback/{{session._id}}/add-feedback" method="POST">
+  <textarea name="comment" id="" cols="30" rows="10"></textarea><br>
+  <button type="submit">Add Feedback </button>
+</form> --}}
+{{#if session.feedbacks}}
+  <h4>Feedbacks</h4>
+  {{#each session.feedbacks}}
+    <p> <b>{{ this.user.fullName }} said : </b> {{ this.comment }} </p>
+        {{!-- {{#if this.canBeChanged}} --}}
+        <form action="/feedback/{{this._id}}/edit">
+            <button type="submit"> EDIT </button>
+        </form>
+        <form action="/feedback/{{this._id}}/delete" method="POST">
+          <button type="submit"> DELETE </button>
+        </form>  
+  {{/each}}
+{{/if}}
+
+
+  

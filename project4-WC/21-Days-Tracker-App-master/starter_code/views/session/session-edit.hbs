@@ -1,0 +1,15 @@
+   
+   
+<h4> Edit Feedback <h4>
+    
+        <form action="/feedback/{{feedbackId}}/edit" method="POST">
+                <textarea name="comment" id="" cols="30" rows="10" value="{{feedbackId.comment}}"></textarea><br>
+                <button type="submit"> Update Comment </button>
+        </form>
+    
+
+    {{#each session.feedbacks}}
+        <textarea name="comment" id="" cols="30" rows="10" value="{{feedbackId.comment}}"></textarea><br>
+     {{/each}}
+
+
