@@ -30,12 +30,20 @@
 
         <button type="submit">Submit </button>
 </form>
+{{!-- <h4>Progress Plan </h4
+<ul>
+{{#each session}}
+  <li>{{session.session}} Calories: {{session.calories}} Water: {{session.water}} Sleep: {{session.sleep}} Exercise: {{session.exercise}}</li>
 
+<form action="/session/{{this.session._id}}/progress">
+
+  <button type="submit">Submit </button>
+</form>
 <h4>Add Feedback</h4>
 <form action="/feedback/{{session._id}}/add-feedback" method="POST">
   <textarea name="comment" id="" cols="30" rows="10"></textarea><br>
   <button type="submit">Add Feedback </button>
-</form>
+</form> --}}
 {{#if session.feedbacks}}
   <h4>Feedbacks</h4>
   {{#each session.feedbacks}}

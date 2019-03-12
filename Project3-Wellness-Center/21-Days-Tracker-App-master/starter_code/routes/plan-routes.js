@@ -132,15 +132,26 @@ router.post('/:id/add-session', ensureAuthenticated, uploadCloud.single('imageSe
         foundPlan.sessions.push(thenewSession._id);
         foundPlan.save()
           .then(() => {
-            res.redirect(`/plans/${req.params.id}`);
+            const i=1;
+            res.redirect(`/plans/${req.params.id}`, {i}, {foundPlan});
             // res.redirect('/user/profile')
           })
-          .catch(err => console.log('Error while saving the user: ', err));
+          .catch(err => console.log('Error while saving the plan: ', err));
       })
       .catch(err => console.log('Error while saving the user: ', err));
     })
     .catch(err => console.log('Error while saving the user: ', err));
 });
+
+// router.get('/session/session-details', (req, res, next) =>{
+//   User.findOne(req.user)
+//     .then((user) =>{
+//       res.render('session/session-details', {user});
+//     })
+//     .catch((error) =>{
+//       console.log(error)
+//     })
+// })
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 function ensureAuthenticated(req, res, next) {
