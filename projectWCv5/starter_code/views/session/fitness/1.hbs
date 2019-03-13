@@ -1,0 +1,42 @@
+
+    
+    <h1> Please Create <b> Routine</b></h1>
+    <section>
+      <form action="/{{plan.name}}/{{plan._id}}/add-routine" method="post" enctype="multipart/form-data"> 
+        
+        <label for="">Session number: </label>
+        <input type="number" name="session">
+      
+        <label for="">Education:</label>
+        <textarea name="education" id="" cols="30" rows="10"></textarea>
+
+        <label for="">Tips:</label>
+        <input type="text" name="tips" id="">
+
+        <label>Image session {{plan.routine.session}}</label>
+        <input type="file" name="imagePlan" id="">
+
+        <label for="">Water : 8 glasses</label>
+        <input type="Number" name="water" id="">
+
+        <label for="">Calories : 2000 cal</label>
+        <input type="Number" name="calories" id="">
+
+        <label for="">Sleep : 8 hours/day</label>
+        <input type="Number" name="sleep" id="" >
+
+        <label for="">Exercise : 60 minutes</label>
+        <input type="Number" name="exercise" id="">
+
+        <button type="submit">Add Routine </button>
+      </form>
+    </section>
+
+      {{#if this.canBeChanged}}
+        <a href="/routines/{{this._id}}">Edit</a>
+          <form action="/routines/{{this._id}}" method="POST">
+            <button type="submit">Delete</button>
+          </form>
+      {{/if}}
+    {{/each}}
+{{/if}} 

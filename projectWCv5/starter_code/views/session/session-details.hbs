@@ -11,7 +11,7 @@
 <p>{{session.tips}}</p> <br>
 <h4>Progress</h4>
 
-<form action="/session/{{session._id}}/{{session.session}}" method="post"> 
+<form action="/session/{{session._id}}/{{session.session}}" method="post" id="routine-form"> 
 
         <label for="">Session</label>
         <input type="Number" name="session" id="" value={{session.session}}><br>
@@ -30,29 +30,25 @@
 
         <button type="submit">Submit </button>
 </form>
-<h4>Progress Plan <b>{{session.session}}</b></h4>
-{{!-- <form action="/api/data" > --}}
-  
-  {{!-- <button type="submit">Progress User</button>
-</form>
+<h4>Progress Plan </h4>
 
- <h1>Stock data  Info</h1> --}}
-  <input id="theInput" type="text">
-  <button id="l">Get the Progress</button><br>
-<canvas id="myChart" width="400" height="400"></canvas>
+<button type="submit" id="getButton">Progress Chart</button>
+{{!-- the data we get from the API will be populated in here:  --}}
+<canvas id="myChart"></canvas>
+
 {{!-- <ul>
-{{#each routineUser}}
-  <li>{{routineUser.session}} Calories: {{routineUser.calories}} Water: {{routineUser.water}} Sleep: {{routineUser.sleep}} Exercise: {{routineUser.exercise}}</li>
+{{#each session}}
+  <li>{{session.session}} Calories: {{session.calories}} Water: {{session.water}} Sleep: {{session.sleep}} Exercise: {{session.exercise}}</li>
 
 <form action="/session/{{this.session._id}}/progress">
-{{/each}}
+
   <button type="submit">Submit </button>
 </form> --}}
 <h4>Add Feedback</h4>
 <form action="/feedback/{{session._id}}/add-feedback" method="POST">
   <textarea name="comment" id="" cols="30" rows="10"></textarea><br>
   <button type="submit">Add Feedback </button>
-</form>
+</form> 
 {{#if session.feedbacks}}
   <h4>Feedbacks</h4>
   {{#each session.feedbacks}}

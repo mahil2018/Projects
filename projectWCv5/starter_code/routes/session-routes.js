@@ -60,7 +60,7 @@ router.post('/session/:id/1', ensureAuthenticated,(req, res) =>{
 router.get('/api/data', (req, res) =>{
   User.findById(req.user._id).populate('routines')
   .then(response =>{
-    console.log('The response is: ', response.routines)
+    console.log('The response from DB is: ', response.routines)
     // printTheChart(response.routines)
     res.json(response.routines)
   })

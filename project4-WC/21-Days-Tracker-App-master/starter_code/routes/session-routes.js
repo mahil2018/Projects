@@ -17,12 +17,21 @@ router.get('/session/:id/1', (req, res, next) =>{
       User.findById(req.user._id)
       .then(foundUser =>{
             const routineUser = foundUser.routines;
-            Routine.findOne(routineUser)
-            .then(theRoutines => {
+            // console.log('HERE HERE', routineUser);
+              //             routine.find({ _id: `${id}` }).populate('routines')
+              //   .then((data) => {
+              //   /// do something
+              // }).catch((err) => console.log('Error ', err));
+            const i=0;
+            var array = [];
+            if (i<4)
+            Routine.find({_id: `${routineUser[i]}`}).populate('routines')
+            .then(data => {
               // const {calories} = theRoutines.calories; //, water, sleep, exercise}
              //&&&&&&&&&&&&&&&&&& cambio de routine
-            console.log('HERE IS :',  {foundUser}, {routineUser});
-            res.render('session/session-details', {session: foundSession, routineUser});
+            // console.log('HERE IS :',  {data});
+            array = array + data;
+            res.render('session/session-details', {session: foundSession, data});
             })
             .catch( error => console.log('Error while finding the routine: ', error))
         .catch((error)=> console.log( 'Error while user is adding routine', error))
@@ -66,35 +75,35 @@ router.post('/session/:id/1', ensureAuthenticated,(req, res) =>{
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //Create Get Request for /api/data...json
-router.get('/api/data', (req, res) =>{
-  User.findById(req.user._id).populate('routines')
-  .then(response =>{
-    console.log('The response is: ', response.routines)
-    // printTheChart(response.routines)
-    res.json(response.routines)
-  })
-  .catch( error => console.log('Error while finding the Chart: ', error))
-    // res.json(response) 
-    // const printTheChart = (routinesData =>{
-    //   const labels = routinesData.map( element => element.calories);
-    //   const routina = routinesData.map( element => element.session);
-    //   console.log('the calories are : ', labels, routina);
-      // const ctx = document.getElementById('myChart').getContext('2d');
-      // const chart = new Chart(ctx, {
-      //   type: 'line',
-      //   data: {
-      //     labels: labels,
-      //     datasets: [{
-      //       label: "Progress Chart",
-      //       backgroundColor: 'rgb(255, 99, 132)',
-      //       borderColor: 'rgb(255, 99, 132)',
-      //       data: routina,
-      //     }]
-      //   }
-      // });
+// router.get('/api/data', (req, res) =>{
+//   User.findById(req.user._id).populate('routines')
+//   .then(response =>{
+//     console.log('The response is: ', response.routines)
+//     // printTheChart(response.routines)
+//     res.json(response.routines)
+//   })
+//   .catch( error => console.log('Error while finding the Chart: ', error))
+//     // res.json(response) 
+//     // const printTheChart = (routinesData =>{
+//     //   const labels = routinesData.map( element => element.calories);
+//     //   const routina = routinesData.map( element => element.session);
+//     //   console.log('the calories are : ', labels, routina);
+//       // const ctx = document.getElementById('myChart').getContext('2d');
+//       // const chart = new Chart(ctx, {
+//       //   type: 'line',
+//       //   data: {
+//       //     labels: labels,
+//       //     datasets: [{
+//       //       label: "Progress Chart",
+//       //       backgroundColor: 'rgb(255, 99, 132)',
+//       //       borderColor: 'rgb(255, 99, 132)',
+//       //       data: routina,
+//       //     }]
+//       //   }
+//       // });
 
-    // })
-})
+//     // })
+// })
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 //Routine details ====> //localhost:3000/routine/5c7eb3ba952c9337f865d955/1
