@@ -14,7 +14,19 @@ router.get('/session/:id/1', (req, res, next) =>{
   .populate({path:'feedbacks', populate: {path: 'user'}})
 
     .then(foundSession =>{
-      res.render('session/session-details', {session: foundSession, user: req.user})
+      User.findById(req.user._id)
+      .then(foundUser =>{
+            const routineUser = foundUser.routines;
+            Routine.findOne(routineUser)
+            .then(theRoutines => {
+              // const {calories} = theRoutines.calories; //, water, sleep, exercise}
+             //&&&&&&&&&&&&&&&&&& cambio de routine
+            console.log('HERE IS :',  {foundUser}, {routineUser});
+            res.render('session/session-details', {session: foundSession, routineUser});
+            })
+            .catch( error => console.log('Error while finding the routine: ', error))
+        .catch((error)=> console.log( 'Error while user is adding routine', error))
+      })
     })
     .catch( error => console.log('Error while finding the routine: ', error))
 })
@@ -52,17 +64,54 @@ router.post('/session/:id/1', ensureAuthenticated,(req, res) =>{
       })
 });
 
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//Create Get Request for /api/data...json
+router.get('/api/data', (req, res) =>{
+  User.findById(req.user._id).populate('routines')
+  .then(response =>{
+    console.log('The response is: ', response.routines)
+    // printTheChart(response.routines)
+    res.json(response.routines)
+  })
+  .catch( error => console.log('Error while finding the Chart: ', error))
+    // res.json(response) 
+    // const printTheChart = (routinesData =>{
+    //   const labels = routinesData.map( element => element.calories);
+    //   const routina = routinesData.map( element => element.session);
+    //   console.log('the calories are : ', labels, routina);
+      // const ctx = document.getElementById('myChart').getContext('2d');
+      // const chart = new Chart(ctx, {
+      //   type: 'line',
+      //   data: {
+      //     labels: labels,
+      //     datasets: [{
+      //       label: "Progress Chart",
+      //       backgroundColor: 'rgb(255, 99, 132)',
+      //       borderColor: 'rgb(255, 99, 132)',
+      //       data: routina,
+      //     }]
+      //   }
+      // });
 
+    // })
+})
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 //Routine details ====> //localhost:3000/routine/5c7eb3ba952c9337f865d955/1
 router.get('/session/:id/2', (req, res, next) =>{
   Session.findById(req.params.id)
     .then(foundSession =>{
-      res.render('session/session-details', {session: foundSession, user: req.user})
-    })
+      User.findById(req.user._id)
+      .then(foundUser =>{
+            const routineUser = foundUser.routines; //{calories, water, sleep, exercise}
+            // const i = thenewRoutine.session+1;  //&&&&&&&&&&&&&&&&&& cambio de routine
+            // console.log('HERE IS i:',  {foundUser}, {routineUser});
+            res.render('session/session-details', {session: foundSession, routineUser})
+          })
+        .catch((error)=> console.log( 'Error while user is adding routine', error))
     .catch( error => console.log('Error while finding the routine: ', error))
-})
+   })
+});
 
 // User update routine =====> POST /routine/5c7eb3ba952c9337f865d955/1
 router.post('/session/:id/2', ensureAuthenticated,(req, res) =>{
@@ -83,10 +132,6 @@ router.post('/session/:id/2', ensureAuthenticated,(req, res) =>{
             foundUser.routines.push(thenewRoutine._id);
             foundUser.save()
               .then(() =>{
-                const routineUser = foundUser.routines; //{calories, water, sleep, exercise}
-                
-                // const i = thenewRoutine.session+1;  //&&&&&&&&&&&&&&&&&& cambio de routine
-                console.log('HERE IS i:',  {foundUser}, {routineUser});
                 res.redirect(`/session/${req.params.id}/${thenewRoutine.session}`);
               })
               .catch((error)=> console.log( 'Error while user is adding routine', error))
