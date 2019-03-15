@@ -9,8 +9,11 @@
 <p>{{session.education}}</p> <br>
 <h4>Tips: </h4>
 <p>{{session.tips}}</p> <br>
-<h4>Progress</h4>
+<h4>Progress: <b>{{session.session}}</b></h4>
 
+{{!-- {{> progressRoutine}} --}}
+{{#if showForm}}
+<section>
 <form action="/session/{{session._id}}/{{session.session}}" method="post" id="routine-form"> 
 
         <label for="">Session</label>
@@ -30,7 +33,9 @@
 
         <button type="submit" id="routine-button">Submit </button>
 </form>
-<h4>Progress Plan </h4>
+</section>
+{{/if}}
+
 
 <button type="submit" id="getButton">Progress Chart</button>
 {{!-- the data we get from the API will be populated in here:  --}}

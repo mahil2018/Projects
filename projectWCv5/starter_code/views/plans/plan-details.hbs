@@ -15,7 +15,7 @@
   </form>
 {{/if}}
 {{#each plan.sessions}}
-  <a href="/session/{{this._id}}/{{this.session}}">Session {{this.session}}</a><br>
+  <a href="/session/{{this._id}}/search?session={{this.session}}">Session {{this.session}}</a><br>
 {{/each}}
 
 {{!-- 
