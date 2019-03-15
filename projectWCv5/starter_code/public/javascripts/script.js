@@ -8,10 +8,11 @@ const routineInfo  = axios.create({
 }); 
  
  //Get Character Form
+
  document.getElementById("getButton").onclick = function(event){
   routineInfo.get('data')
     .then(response => {
-        console.log('Response from API is: ', response.data);
+        // console.log('Response from API is: ', response.data);
         // const countryName = response.data[0].calories;
         // const countryCapital = response.data[0].water;
         // const currencyName  = response.data[0].sleep
@@ -22,6 +23,8 @@ const routineInfo  = axios.create({
         // document.getElementById("countryCapital").innerHTML = "Capital: " + countryCapital;
         // document.getElementById("currency").innerHTML = "Sleep: " + currencyName;  
         printTheChart(response.data);
+      
+      
     })
     .catch( error => {
       console.log(error);
@@ -29,23 +32,128 @@ const routineInfo  = axios.create({
     const printTheChart = (routineData => {
       console.log('The response after printChart is: ', routineData)
       // instead in the console, show data in the browser using JS DOM manipulation:
-
+      
       const xLabels = routineData.map( element => element.session);
-      const yRoutine  = routineData.map( element => element.calories);
-      console.log('The array of calories is: ', yRoutine)
-      console.log('The array of sessions is: ', xLabels)
+      const yRoutine  = routineData.map( element => element.water);
+      // const calRoutine  = routineData.map( element => element.calories);
+      const sleepRoutine  = routineData.map( element => element.sleep);
+      const exeRoutine  = routineData.map( element => element.exercise);
+      // console.log('The array of calories is: ', yRoutine)
+      // console.log('The array of sessions is: ', xLabels)
       const ctx         = document.getElementById('myChart').getContext('2d');
-      const chart       = new Chart(ctx, {
+      var mixedChart       = new Chart(ctx, {
         type: 'bar',
         data: {
           labels: xLabels,
           datasets: [{
-            label: "Progress Chart",
+            label: "Progress Water",
+            backgroundColor: 'mediumseagreen',
             backgroundColor: '#e4e338',
-            borderColor: 'rgb(255, 99, 132)',
+            borderColor: 'mediumseagreen',
             data: yRoutine,
-          }]
+          },
+          // {
+          //   label: "Progress Calories ",
+          //   backgroundColor: 'peru',
+          //   borderColor: 'brown',
+          //   data: calRoutine,
+          // },
+          {
+            label: "Progress Sleep",
+            backgroundColor: 'navy',
+            borderColor: 'turquese',
+            data: sleepRoutine,
+          },
+          {
+            label: "Progress Exercise",
+            backgroundColor: 'dodgerblue',
+            borderColor: 'papayawhip',
+            data: exeRoutine,
+          }
+        ]
         }
       });
+    
+      //&&&&&&&&&&&&SECOND GRAPH&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
   });
 }
+// //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+// document.getElementById("getButton").onclick = function(event){
+//   routineInfo.get('data')
+//     .then(response => {
+//         // console.log('Response from API is: ', response.data);
+//         // const countryName = response.data[0].calories;
+//         // const countryCapital = response.data[0].water;
+//         // const currencyName  = response.data[0].sleep
+//         // The following lane hides the form to create a new character when we are updating one
+//         document.getElementById("routine-form").style.display = "none";
+//         document.getElementById("myChart").style.display = "block";
+//         // document.getElementById("countryName").innerHTML = "Calories: " + countryName;
+//         // document.getElementById("countryCapital").innerHTML = "Capital: " + countryCapital;
+//         // document.getElementById("currency").innerHTML = "Sleep: " + currencyName;  
+//         printTheChart(response.data);
+      
+      
+//     })
+//     .catch( error => {
+//       console.log(error);
+//     });
+//     const printTheChart = (routineData => {
+//       // console.log('The response after printChart is: ', routineData)
+//       // instead in the console, show data in the browser using JS DOM manipulation:
+      
+//       const xLabels = routineData.map( element => element.session);
+//       const calRoutine  = routineData.map( element => element.calories);
+//       const waterRoutine  = routineData.map( element => element.water);
+//       const sleepRoutine  = routineData.map( element => element.sleep);
+//       const exeRoutine  = routineData.map( element => element.exercise);
+//       // console.log('The array of calories is: ', yRoutine)
+//       // console.log('The array of sessions is: ', xLabels)
+//       const ctx         = document.getElementById('myChart').getContext('2d');
+//       const chart       = new Chart(ctx, {
+//         type: 'spline',
+//         data:  {
+//           datasets : [{
+//           labels: xLabels,
+//           datasets: [{
+//             label: "Progress Chart",
+//             backgroundColor: '#e4e338',
+//             borderColor: 'rgb(255, 99, 132)',
+//             data: calRoutine,
+//           }]//,
+        // }
+        // {
+        //   labels: xLabels,
+        //   datasets: [{
+        //     label: "Progress Chart",
+        //     backgroundColor: 'mediumseagreen',
+        //     borderColor: 'rgb(255, 99, 132)',
+        //     data: waterRoutine,
+        //   }]
+        // },
+        // {
+        //   labels: xLabels,
+        //   datasets: [{
+        //     label: "Progress Chart",
+        //     backgroundColor: 'peru',
+        //     borderColor: 'rgb(255, 99, 132)',
+        //     data: sleepRoutine,
+        //   }]
+        // },
+        // {
+        //   labels: xLabels,
+        //   datasets: [{
+        //     label: "Progress Chart",
+        //     backgroundColor: '',
+        //     borderColor: 'rgb(255, 99, 132)',
+        //     data: exeRoutine,
+        //   }]
+//         }]
+//       }
+//       });
+    
+//       //&&&&&&&&&&&&SECOND GRAPH&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+//   });
+// }
