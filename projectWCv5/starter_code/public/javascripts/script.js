@@ -1,3 +1,7 @@
+
+document.getElementById('routine-button').onclick = function(event){
+  document.getElementById("routine-form").style.display = "none";
+}
 //porque script es e unico archivo que cargo en el DOM y puede leer document 
 const routineInfo  = axios.create({
   baseURL: 'http://localhost:3000/api/',
@@ -37,7 +41,7 @@ const routineInfo  = axios.create({
           labels: xLabels,
           datasets: [{
             label: "Progress Chart",
-            backgroundColor: 'mediumseagreen',
+            backgroundColor: '#e4e338',
             borderColor: 'rgb(255, 99, 132)',
             data: yRoutine,
           }]
