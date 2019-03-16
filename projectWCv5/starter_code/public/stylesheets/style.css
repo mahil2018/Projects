@@ -318,6 +318,9 @@ body {
 .profile-activity:hover .tools {
   display: block; }
 
+.input-form-session {
+  display: block; }
+
 .user-profile .ace-thumbnails li {
   border: 1px solid #CCC;
   padding: 3px;
@@ -1145,7 +1148,8 @@ body {
   z-index: 1;
   line-height: 18px;
   margin-top: -1px;
-  box-shadow: 0 -2px 3px 0 rgba(0, 0, 0, 0.15); }
+  box-shadow: 0 -2px 3px 0 rgba(0, 0, 0, 0.15);
+  display: flex; }
 
 .tabs-below > .nav-tabs {
   top: auto;

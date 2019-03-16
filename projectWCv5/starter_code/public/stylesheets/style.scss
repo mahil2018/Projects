@@ -217,6 +217,7 @@ h2 {
 
 body{margin-top:20px;}
 
+
 .align-center, .center {
     text-align: center!important;
 }
@@ -373,6 +374,9 @@ body{margin-top:20px;}
     display: block
 }
 
+.input-form-session{
+  display: block;
+}
 .user-profile .ace-thumbnails li {
     border: 1px solid #CCC;
     padding: 3px;
@@ -555,6 +559,8 @@ body{margin-top:20px;}
     background-color: #FFF
 }
 
+
+
 @media only screen and (max-width:480px) {
     .profile-info-name {
         width: 80px
@@ -573,7 +579,8 @@ body{margin-top:20px;}
     .user-profile .memberdiv {
         width: 50%;
         margin-left: 0;
-        margin-right: 0
+        margin-right: 0;
+        
     }
 }
 
@@ -849,6 +856,8 @@ body{margin-top:20px;}
 }
 
 
+
+
 .ace-thumbnails>li,
 .ace-thumbnails>li>:first-child {
     display: block;
@@ -1051,7 +1060,10 @@ body{margin-top:20px;}
         display: inline-block
     }
 }
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+.form-horizontal{
 
+}
 
 .tab-content {
     border: 1px solid #C5D0DC;
@@ -1382,7 +1394,8 @@ body{margin-top:20px;}
     z-index: 1;
     line-height: 18px;
     margin-top: -1px;
-    box-shadow: 0 -2px 3px 0 rgba(0, 0, 0, .15)
+    box-shadow: 0 -2px 3px 0 rgba(0, 0, 0, .15);
+    display: flex
 }
 
 .tabs-below>.nav-tabs {

@@ -14,26 +14,28 @@
 {{!-- {{> progressRoutine}} --}}
 {{#if showForm}}
 <section>
-<form action="/session/{{session._id}}/{{session.session}}" method="post" id="routine-form"> 
+<div class="form-style-3"></div>
+<form class="form-horizontal" action="/session/{{session._id}}/{{session.session}}" method="post" id="routine-form"> 
+<fieldset><legend>Personal track</legend>
+        <label for="">Session              :</label>
+        <input class="input-field" type="Number" name="session" id="" value={{session.session}}><br>
 
-        <label for="">Session</label>
-        <input type="Number" name="session" id="" value={{session.session}}><br>
+        <label for="">Calories : 2000 cal  :</label>
+        <input class="input-form-session" type="Number" name="calories" id=""><br>
 
-        <label for="">Calories : 2000 cal</label>
-        <input type="Number" name="calories" id=""><br>
+        <label for="">Water : 8 glasses    :</label>
+        <input class="input-form-session" type="Number" name="water" id=""><br>
 
-        <label for="">Water : 8 glasses</label>
-        <input type="Number" name="water" id=""><br>
+        <label for="">Sleep : 8 hours/day  :</label>
+        <input class="input-form-session" type="Number" name="sleep" id="" ><br>
 
-        <label for="">Sleep : 8 hours/day</label>
-        <input type="Number" name="sleep" id="" ><br>
+        <label for="">Exercise : 60 minutes:</label>
+        <input class="input-form-session" type="Number" name="exercise" id=""><br>
 
-        <label for="">Exercise : 60 minutes</label>
-        <input type="Number" name="exercise" id=""><br>
-
-        <button type="submit" id="routine-button">Submit </button>
+        <button  type="submit" id="routine-button">Submit </button>
 </form>
 </section>
+</div>
 {{/if}}
 
 
