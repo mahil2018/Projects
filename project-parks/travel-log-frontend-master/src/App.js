@@ -14,6 +14,7 @@ import Community from './components/Community';
 import NotFound from './components/NotFound';
 //Style Components
 import Navbar from './components/Navbar'
+import Footer from './Footer';
 
 
 class App extends Component {
@@ -70,11 +71,7 @@ class App extends Component {
               <Route path="/community" component={Community} />
               <Route component={NotFound} /> 
             </Switch>
-        
-
-        <footer>
-          Made with React
-        </footer>
+        <Footer />
       </div>
     );
   }

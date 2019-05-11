@@ -38,9 +38,9 @@ class Home extends React.Component {
               alt="Yellowstone"
             />
             <Carousel.Caption>
-            <button type="button" class="btn btn-success">Plan Your Visit</button>
-            <button type="button" class="btn btn-success">Learn and Explore</button>
-            <button type="button" class="btn btn-success">Get Involved</button>
+            <button type="button" class="btn-btn-success">Plan Your Visit</button>
+            <button type="button" class="btn-btn-success">Learn and Explore</button>
+            <button type="button" class="btn-btn-success">Get Involved</button>
               
 
             </Carousel.Caption>
@@ -53,9 +53,9 @@ class Home extends React.Component {
             />
   
             <Carousel.Caption>
-            <button type="button" class="btn btn-success">Plan Your Visit</button>
-            <button type="button" class="btn btn-success">Learn and Explore</button>
-            <button type="button" class="btn btn-success">Get Involved</button>
+            <button type="button" class="btn-btn-success">Plan Your Visit</button>
+            <button type="button" class="btn-btn-success">Learn and Explore</button>
+            <button type="button" class="btn-btn-success">Get Involved</button>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
@@ -66,9 +66,9 @@ class Home extends React.Component {
             />
   
             <Carousel.Caption>
-            <button type="button" class="btn btn-success">Plan Your Visit</button>
-            <button type="button" class="btn btn-success">Learn and Explore</button>
-            <button type="button" class="btn btn-success">Get Involved</button>
+            <button type="button" class="btn-btn-success">Plan Your Visit</button>
+            <button type="button" class="btn-btn-success">Learn and Explore</button>
+            <button type="button" class="btn-btn-success">Get Involved</button>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>

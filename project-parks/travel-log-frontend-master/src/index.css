@@ -15,3 +15,48 @@ code {
 .img-slider{
   width: auto;
 }
+
+.btn-btn-success {
+  transition: background-color .3s ease;
+ 
+  background-color: #4b5e26;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  font-weight: 700;
+  margin: 0 15px;
+  margin: 0 .9375rem;
+  padding: 17px 0;
+  padding: 1.0625rem 0;
+  overflow: hidden;
+  position: relative;
+  text-transform: uppercase;
+  width: 160px;
+}
+
+/* Style all font awesome icons */
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+  opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+
+/* Facebook */
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+/* Twitter */
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
